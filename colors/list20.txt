@@ -1,0 +1,153 @@
+Red
+#e6194B
+R: 230
+G: 25
+B: 75
+1
+
+Green
+#3cb44b
+R: 60
+G: 180
+B: 75
+2
+
+Yellow
+#ffe119
+R: 255
+G: 225
+B: 25
+3
+
+Blue
+#4363d8
+R: 0
+G: 130
+B: 200
+4
+
+Orange
+#f58231
+R: 245
+G: 130
+B: 48
+5
+
+Purple
+#911eb4
+R: 145
+G: 30
+B: 180
+6
+
+Cyan
+#42d4f4
+R: 70
+G: 240
+B: 240
+7
+
+Magenta
+#f032e6
+R: 240
+G: 50
+B: 230
+8
+
+Lime
+#bfef45
+R: 210
+G: 245
+B: 60
+9
+
+Pink
+#fabed4
+R: 250
+G: 190
+B: 212
+10
+
+Teal
+#469990
+R: 0
+G: 128
+B: 128
+11
+
+Lavender
+#dcbeff
+R: 220
+G: 190
+B: 255
+12
+
+Brown
+#9A6324
+R: 170
+G: 110
+B: 40
+13
+
+Beige
+#fffac8
+R: 255
+G: 250
+B: 200
+14
+
+Maroon
+#800000
+R: 128
+G: 0
+B: 0
+15
+
+Mint
+#aaffc3
+R: 170
+G: 255
+B: 195
+16
+
+Olive
+#808000
+R: 128
+G: 128
+B: 0
+17
+
+Apricot
+#ffd8b1
+R: 255
+G: 215
+B: 180
+18
+
+Navy
+#000075
+R: 0
+G: 0
+B: 128
+19
+
+Grey
+#a9a9a9
+R: 128
+G: 128
+B: 128
+20
+
+White
+#ffffff
+R: 255
+G: 255
+B: 255
+21
+
+Black
+#000000
+R: 0
+G: 0
+B: 0
+22
