@@ -1,0 +1,6 @@
+https://github.com/fbparis/mokole.com
+https://gist.github.com/tatarize/a483db49993e6e0e994ad82ba3e2a22e
+https://mokole.com/palette.html
+https://martin.ankerl.com/2009/12/09/how-to-create-random-colors-programmatically/
+https://alumni.media.mit.edu/~wad/color/palette.html
+http://colormine.org/convert/rgb-to-lab
