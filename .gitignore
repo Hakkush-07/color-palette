@@ -1,1 +1,3 @@
 rgb2lab.pkl
+*/__pycache__/
+.DS_Store
