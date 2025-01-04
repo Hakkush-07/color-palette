@@ -1,51 +1,89 @@
 from math import acos, sqrt, pi
-import pickle
-
-# r, g, b in [0, 255]
-# l in [0, 100]
-# a, b in [-128, 128]
-# h in [0, 360]
-# s, l, v in [0, 1]
 
 def rgb2hsv(r, g, b):
     mx = max([r, g, b])
     mn = min([r, g, b])
-    v = mx / 255
-    s = 1 - mn / mx if mx else 0
-    x = r - g / 2 - b / 2
-    y = r * r + g * g + b * b - r * g - g * b - b * r
-    z = acos(x / sqrt(y)) * 180 / pi
-    h = z if g >= b else 360 - z
+    mxk = mx / 255
+    mnk = mn / 255
+    d = mxk - mnk
+    rx, gx, bx = r / 255, g / 255, b / 255
+    if d == 0:
+        h = 0
+    elif mx == r:
+        h = 60 * (((gx - bx) / d) % 6)
+    elif mx == g:
+        h = 60 * ((bx - rx) / d + 2)
+    elif mx == b:
+        h = 60 * ((rx - gx) / d + 4)
+    if mx == 0:
+        s = 0
+    else:
+        s = d / mxk
+    v = mxk
     return h, s, v
 
 def hsv2rgb(h, s, v):
-    mx = 255 * v
-    mn = mx * (1 - s)
-    z = (mx - mn) * (1 - abs((h / 60) % 2 - 1))
-    r = mn if 120 <= h < 240 else mx if h < 60 or h >= 300 else z + mn
-    g = mn if 240 <= h else mx if 60 <= h < 180 else z + mn
-    b = mn if h < 120 else mx if 180 <= h < 300 else z + mn
+    d = v * s
+    hx = h / 60
+    x = d * (1 - abs(hx % 2 - 1))
+    if 0 <= hx < 1:
+        rx, gx, bx = d, x, 0
+    elif 1 <= hx < 2:
+        rx, gx, bx = x, d, 0
+    elif 2 <= hx < 3:
+        rx, gx, bx = 0, d, x
+    elif 3 <= hx < 4:
+        rx, gx, bx = 0, x, d
+    elif 4 <= hx < 5:
+        rx, gx, bx = x, 0, d
+    elif 5 <= hx < 6:
+        rx, gx, bx = d, 0, x
+    m = v - d
+    r, g, b = rx + m, gx + m, bx + m
+    r, g, b = round(255 * r), round(255 * g), round(255 * b)
     return r, g, b
 
 def rgb2hsl(r, g, b):
     mx = max([r, g, b])
     mn = min([r, g, b])
-    d = (mx - mn) / 255
-    l = (mx + mn) / 510
-    s = d / (1 - abs(2 * l - 1)) if l else 0
-    x = r - g / 2 - b / 2
-    y = r * r + g * g + b * b - r * g - g * b - b * r
-    z = acos(x / sqrt(y)) * 180 / pi
-    h = z if g >= b else 360 - z
+    mxk = mx / 255
+    mnk = mn / 255
+    d = mxk - mnk
+    rx, gx, bx = r / 255, g / 255, b / 255
+    if d == 0:
+        h = 0
+    elif mx == r:
+        h = 60 * (((gx - bx) / d) % 6)
+    elif mx == g:
+        h = 60 * ((bx - rx) / d + 2)
+    elif mx == b:
+        h = 60 * ((rx - gx) / d + 4)
+    l = (mxk + mnk) / 2
+    if l == 0 or l == 1:
+        s = 0
+    else:
+        s = d / (1 - abs(2 * l - 1))
     return h, s, l
 
 def hsl2rgb(h, s, l):
-    d = s * (1 - abs(2 * l-1))
-    m = 255 * (l - d / 2)
-    x = d * (1 - abs((h / 60) % 2 - 1))
-    r = m + (0 if 120 <= h < 240 else 255 * d if h < 60 or h >= 300 else 255 * x)
-    g = m + (0 if h >= 240 else 255 * d if 60 <= h < 180 else 255 * x)
-    b = m + (0 if h <= 120 else 255 * d if 180 <= h < 300 else 255 * x)
+    d = (1 - abs(2 * l - 1)) * s
+    hx = h / 60
+    x = d * (1 - abs(hx % 2 - 1))
+    if 0 <= hx < 1:
+        rx, gx, bx = d, x, 0
+    elif 1 <= hx < 2:
+        rx, gx, bx = x, d, 0
+    elif 2 <= hx < 3:
+        rx, gx, bx = 0, d, x
+    elif 3 <= hx < 4:
+        rx, gx, bx = 0, x, d
+    elif 4 <= hx < 5:
+        rx, gx, bx = x, 0, d
+    elif 5 <= hx < 6:
+        rx, gx, bx = d, 0, x
+    m = l - d / 2
+    r, g, b = rx + m, gx + m, bx + m
+    r, g, b = round(255 * r), round(255 * g), round(255 * b)
     return r, g, b
 
 def rgb2lab(r, g, b):
@@ -115,21 +153,28 @@ def lab2rgb(l, a, b):
     ga = gm * 255
     ba = bm * 255
 
-    correct = 0 <= ra <= 255 and 0 <= ga <= 255 and 0 <= ba <= 255
+    ra, ga, ba = round(ra), round(ga), round(ba)
 
     r = 0 if ra < 0 else 255 if ra > 255 else ra
     g = 0 if ga < 0 else 255 if ga > 255 else ga
     b = 0 if ba < 0 else 255 if ba > 255 else ba
 
-    return r, g, b, correct
+    return r, g, b
 
 def test():
-    print(rgb2hsv(167, 23, 98))
-    print(hsv2rgb(153, 0.675, 0.1313))
-    print(rgb2hsl(167, 23, 98))
-    print(hsl2rgb(153, 0.675, 0.1313))
-    print(rgb2lab(167, 23, 98))
-    print(rgb2lab(10, 200, 30))
-    print(lab2rgb(*rgb2lab(167, 23, 98)))
-    print(lab2rgb(*rgb2lab(10, 200, 30)))
-    print(lab2rgb(65, -128, 5))
+    for r in range(256):
+        for g in range(256):
+            for b in range(256):
+                print(r, "rgb-hsvl")
+                assert (r, g, b) == hsv2rgb(*rgb2hsv(r, g, b))
+                assert (r, g, b) == hsl2rgb(*rgb2hsl(r, g, b))
+    for r in range(256):
+        for g in range(256):
+            for b in range(256):
+                print(r, "rgb-lab")
+                l, a, bb = rgb2lab(r, g, b)
+                rx, gx, bx = lab2rgb(l, a, bb)
+                assert abs(r - rx) + abs(g - gx) + abs(b - bx) <= 1
+
+if __name__ == "__main__":
+    test()
