@@ -1,5 +1,3 @@
-from math import acos, sqrt, pi
-
 def rgb2hsv(r, g, b):
     mx = max([r, g, b])
     mn = min([r, g, b])

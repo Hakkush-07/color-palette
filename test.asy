@@ -15,16 +15,16 @@ void coloring(int row, int column, Label entry, pen color)
 
 draw(out, white);
 
-coloring(0, 1, "\#666c4c", RGB(102, 108, 76));
-coloring(1, 1, "\#eeeab6", RGB(238, 234, 182));
-coloring(2, 1, "\#ef70dc", RGB(239, 112, 220));
-coloring(3, 1, "\#7e39ce", RGB(126, 57, 206));
-coloring(4, 1, "\#7c845", RGB(124, 132, 5));
-coloring(0, 2, "\#cc746", RGB(12, 199, 70));
-coloring(1, 2, "\#163c5e", RGB(22, 60, 94));
-coloring(2, 2, "\#2a82db", RGB(42, 130, 219));
-coloring(3, 2, "\#954f89", RGB(149, 79, 137));
-coloring(4, 2, "\#c7ce18", RGB(199, 206, 24));
+coloring(0, 1, "\#57b569", RGB(87, 181, 105));
+coloring(1, 1, "\#1f7c96", RGB(31, 124, 150));
+coloring(2, 1, "\#2b4dbd", RGB(43, 77, 189));
+coloring(3, 1, "\#2a1fff", RGB(42, 31, 255));
+coloring(4, 1, "\#bb881a", RGB(187, 136, 26));
+coloring(0, 2, "\#f9aabf", RGB(249, 170, 191));
+coloring(1, 2, "\#20fd15", RGB(32, 253, 21));
+coloring(2, 2, "\#d81cac", RGB(216, 28, 172));
+coloring(3, 2, "\#eb131", RGB(235, 1, 49));
+coloring(4, 2, "\#47613", RGB(71, 6, 19));
 
 for (int i = 0; i < n+1; ++i)
 {
