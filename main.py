@@ -2,7 +2,7 @@ from subprocess import run
 from palette import choose_k_colors
 
 def rgb2hex(r, g, b):
-    return hex(r)[2:] + hex(g)[2:] + hex(b)[2:]
+    return hex(r)[2:].zfill(2) + hex(g)[2:].zfill(2) + hex(b)[2:].zfill(2)
 
 def main():
     colors = choose_k_colors(10, iterations=100000)
