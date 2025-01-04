@@ -1,5 +1,33 @@
-from colors import *
-from random import choice, randint
+import pickle
+from math import sqrt
+from converters import rgb2lab
+from random import randint
+from subprocess import run
+
+def rgb2lab_map(file=False, read=False):
+    if read:
+        with open("rgb2lab.pkl", "rb") as f:
+            return pickle.load(f)
+    dct = {}
+    for r in range(256):
+        print("map", r)
+        for g in range(256):
+            for b in range(256):
+                l, a, bb = rgb2lab(r, g, b)
+                dct[(r, g, b)] = (l, a, bb)
+    if file:
+        with open("rgb2lab.pkl", "wb") as f:
+            pickle.dump(dct, f)
+    return dct
+
+def lab_distance(lab1, lab2):
+    l1, a1, b1 = lab1
+    l2, a2, b2 = lab2
+    dl = (l1 - l2) ** 2
+    da = (a1 - a2) ** 2
+    db = (b1 - b2) ** 2
+    kl, ka, kb = 1, 1, 1
+    return sqrt(kl * dl + ka * da + kb * db)
 
 def random_rgb():
     r = randint(0, 255)
@@ -70,5 +98,20 @@ def find_colors(color_count, iteration=1000000):
     print(start_min, end_min)
     print("done")
 
+def a():
+    with open("colors.txt", "r+") as file:
+        content = file.read().splitlines()
+    s = []
+    for i, line in enumerate(content):
+        s.append(f"coloring({i // 9 + 1}, {i % 9 + 1}, {line});")
+    with open("color-template.asy", "r+") as f:
+        x = f.read().replace("REPLACE", "\n".join(s))
+    with open("test.asy", "w+") as f2:
+        f2.write(x)
+    run(["asy", f"test.asy"])
+
 if __name__ == "__main__":
+    rgb2lab_map(file=False, read=True)
     find_colors(20)
+    a()
+

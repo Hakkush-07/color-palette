@@ -123,27 +123,13 @@ def lab2rgb(l, a, b):
 
     return r, g, b, correct
 
-def lab_distance(lab1, lab2):
-    l1, a1, b1 = lab1
-    l2, a2, b2 = lab2
-    dl = (l1 - l2) ** 2
-    da = (a1 - a2) ** 2
-    db = (b1 - b2) ** 2
-    kl, ka, kb = 1, 1, 1
-    return sqrt(kl * dl + ka * da + kb * db)
-
-def rgb2lab_map(file=False, read=False):
-    if read:
-        with open("rgb2lab.pkl", "rb") as f:
-            return pickle.load(f)
-    dct = {}
-    for r in range(256):
-        print("map", r)
-        for g in range(256):
-            for b in range(256):
-                l, a, bb = rgb2lab(r, g, b)
-                dct[(r, g, b)] = (l, a, bb)
-    if file:
-        with open("rgb2lab.pkl", "wb") as f:
-            pickle.dump(dct, f)
-    return dct
+def test():
+    print(rgb2hsv(167, 23, 98))
+    print(hsv2rgb(153, 0.675, 0.1313))
+    print(rgb2hsl(167, 23, 98))
+    print(hsl2rgb(153, 0.675, 0.1313))
+    print(rgb2lab(167, 23, 98))
+    print(rgb2lab(10, 200, 30))
+    print(lab2rgb(*rgb2lab(167, 23, 98)))
+    print(lab2rgb(*rgb2lab(10, 200, 30)))
+    print(lab2rgb(65, -128, 5))

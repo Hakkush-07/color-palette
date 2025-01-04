@@ -15,26 +15,26 @@ void coloring(int row, int column, pen color)
 
 draw(out, white);
 
-coloring(1, 1, RGB(236, 218, 59));
-coloring(1, 2, RGB(166, 43, 188));
-coloring(1, 3, RGB(1, 191, 153));
-coloring(1, 4, RGB(187, 49, 48));
-coloring(1, 5, RGB(133, 43, 217));
-coloring(1, 6, RGB(160, 250, 230));
-coloring(1, 7, RGB(151, 188, 9));
-coloring(1, 8, RGB(129, 251, 46));
-coloring(1, 9, RGB(10, 58, 226));
-coloring(2, 1, RGB(6, 136, 245));
-coloring(2, 2, RGB(253, 163, 253));
-coloring(2, 3, RGB(6, 55, 29));
-coloring(2, 4, RGB(40, 8, 59));
-coloring(2, 5, RGB(90, 253, 75));
-coloring(2, 6, RGB(198, 7, 136));
-coloring(2, 7, RGB(211, 105, 0));
-coloring(2, 8, RGB(60, 187, 2));
-coloring(2, 9, RGB(97, 201, 58));
-coloring(3, 1, RGB(71, 32, 141));
-coloring(3, 2, RGB(239, 14, 12));
+coloring(1, 1, RGB(188, 45, 19));
+coloring(1, 2, RGB(14, 222, 83));
+coloring(1, 3, RGB(40, 46, 134));
+coloring(1, 4, RGB(217, 123, 24));
+coloring(1, 5, RGB(227, 255, 20));
+coloring(1, 6, RGB(57, 68, 228));
+coloring(1, 7, RGB(52, 254, 236));
+coloring(1, 8, RGB(245, 41, 5));
+coloring(1, 9, RGB(45, 123, 251));
+coloring(2, 1, RGB(21, 238, 161));
+coloring(2, 2, RGB(13, 221, 22));
+coloring(2, 3, RGB(120, 56, 205));
+coloring(2, 4, RGB(144, 22, 227));
+coloring(2, 5, RGB(43, 217, 16));
+coloring(2, 6, RGB(218, 48, 86));
+coloring(2, 7, RGB(230, 203, 56));
+coloring(2, 8, RGB(235, 23, 215));
+coloring(2, 9, RGB(50, 9, 6));
+coloring(3, 1, RGB(191, 127, 238));
+coloring(3, 2, RGB(41, 119, 1));
 
 for (int i = 0; i < n+2; ++i)
 {
