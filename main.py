@@ -9,7 +9,7 @@ def text_rgb(r, g, b):
     return (0, 0, 0) if luminance > 0.5 else (255, 255, 255)
 
 def main():
-    colors = choose_k_colors(10, iterations=100000)
+    colors = choose_k_colors(10, iterations=100000, seed_value=100)
     s = []
     for i, color in enumerate(colors):
         r, g, b = color

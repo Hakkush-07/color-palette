@@ -1,4 +1,4 @@
-from random import randint
+from random import randint, seed
 from converters import rgb2lab
 from distance import color_difference_lab
 
@@ -78,7 +78,9 @@ def min_for_replacement(index, new_lab, labs, matrix, current_min, current_pair)
     return min_unaffected, pair_unaffected, new_distances
 
 # choose k colors with big min distance
-def choose_k_colors(k, iterations=100000):
+def choose_k_colors(k, iterations=100000, seed_value=None):
+    if seed_value is not None:
+        seed(seed_value)
     colors = [random_rgb() for _ in range(k)]
     labs = [rgb2lab(*color) for color in colors]
     matrix = build_distance_matrix(labs)
