@@ -8,6 +8,22 @@ def random_rgb():
     b = randint(0, 255)
     return (r, g, b)
 
+def simulate_deuteranopia(rgb):
+    r, g, b = rgb
+    rf, gf, bf = r / 255, g / 255, b / 255
+    r2 = 0.367 * rf + 0.861 * gf + -0.228 * bf
+    g2 = 0.280 * rf + 0.673 * gf + 0.047 * bf
+    b2 = -0.012 * rf + 0.043 * gf + 0.969 * bf
+    r2 = 0 if r2 < 0 else 1 if r2 > 1 else r2
+    g2 = 0 if g2 < 0 else 1 if g2 > 1 else g2
+    b2 = 0 if b2 < 0 else 1 if b2 > 1 else b2
+    return (round(r2 * 255), round(g2 * 255), round(b2 * 255))
+
+def lab_for_color(color, color_blind):
+    if color_blind:
+        color = simulate_deuteranopia(color)
+    return rgb2lab(*color)
+
 def build_distance_matrix(labs):
     size = len(labs)
     matrix = [[0.0 for _ in range(size)] for _ in range(size)]
@@ -78,11 +94,11 @@ def min_for_replacement(index, new_lab, labs, matrix, current_min, current_pair)
     return min_unaffected, pair_unaffected, new_distances
 
 # choose k colors with big min distance
-def choose_k_colors(k, iterations=100000, seed_value=None):
+def choose_k_colors(k, iterations=100000, seed_value=None, color_blind=False):
     if seed_value is not None:
         seed(seed_value)
     colors = [random_rgb() for _ in range(k)]
-    labs = [rgb2lab(*color) for color in colors]
+    labs = [lab_for_color(color, color_blind) for color in colors]
     matrix = build_distance_matrix(labs)
     current, current_pair = find_min_pair(matrix)
     start = current
@@ -91,7 +107,7 @@ def choose_k_colors(k, iterations=100000, seed_value=None):
         a, b = current_pair
         A_lab, B_lab = labs[a], labs[b]
         C = random_rgb()
-        C_lab = rgb2lab(*C)
+        C_lab = lab_for_color(C, color_blind)
         if color_difference_lab(A_lab, C_lab) < current or color_difference_lab(B_lab, C_lab) < current:
             continue
         colors_a = colors.copy()
