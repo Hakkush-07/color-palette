@@ -7,10 +7,10 @@ path out = (-1, -1) -- (-1, h+1) -- (w+1, h+1) -- (w+1, -1) -- cycle;
 
 fill(out, RGB(255, 255, 255));
 
-void coloring(int row, int column, Label entry, pen color)
+void coloring(int row, int column, Label entry, pen color, pen textcolor)
 {
 	fill((row*a, (n-column)*b) -- (row*a+a, (n-column)*b) -- (row*a+a, (n-column)*b+b) -- (row*a, (n-column)*b+b) -- cycle, color);
-	label(entry, (row*a+a/2, (n-column)*b+b/2), p = fontsize(20pt));
+	label(entry, (row*a+a/2, (n-column)*b+b/2), p = fontsize(60pt)+textcolor);
 }
 
 draw(out, white);
@@ -25,4 +25,3 @@ for (int i = 0; i < m+1; ++i)
 {
 	draw((i*a, 0) -- (i*a, h), linewidth(1.0pt));
 }
-

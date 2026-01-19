@@ -10,24 +10,68 @@ def euclidean_distance(a, b):
 def color_difference(rgb1, rgb2):
     return euclidean_distance(rgb2lab(*rgb1), rgb2lab(*rgb2))
 
+def color_difference_lab(lab1, lab2):
+    return euclidean_distance(lab1, lab2)
+
 def distances(colors):
-    return [color_difference(a, b) for a in colors for b in colors]
+    return [
+        color_difference(colors[i], colors[j])
+        for i in range(len(colors))
+        for j in range(i + 1, len(colors))
+    ]
+
+def distances_lab(labs):
+    return [
+        color_difference_lab(labs[i], labs[j])
+        for i in range(len(labs))
+        for j in range(i + 1, len(labs))
+    ]
 
 def average_distance(colors):
-    return sum(distances(colors)) / (len(colors) * (len(colors) - 1))
+    d = distances(colors)
+    return sum(d) / len(d) if d else 0
 
 def max_distance(colors):
-    return max(distances(colors))
+    d = distances(colors)
+    return max(d) if d else 0
 
 def min_distance(colors):
-    return min([a for a in distances(colors) if a > 0])
+    d = distances(colors)
+    return min(d) if d else 0
 
 def closest(colors):
-    d = distances(colors)
-    mn = min([a for a in d if a > 0])
-    i = d.index(mn)
-    a, b = i // len(colors), i % len(colors)
-    return a, b
+    if len(colors) < 2:
+        return 0, 0
+    best = None
+    best_i = 0
+    best_j = 1
+    for i in range(len(colors)):
+        for j in range(i + 1, len(colors)):
+            d = color_difference(colors[i], colors[j])
+            if best is None or d < best:
+                best = d
+                best_i = i
+                best_j = j
+    return best_i, best_j
+
+def min_distance_lab(labs):
+    d = distances_lab(labs)
+    return min(d) if d else 0
+
+def closest_lab(labs):
+    if len(labs) < 2:
+        return 0, 0
+    best = None
+    best_i = 0
+    best_j = 1
+    for i in range(len(labs)):
+        for j in range(i + 1, len(labs)):
+            d = color_difference_lab(labs[i], labs[j])
+            if best is None or d < best:
+                best = d
+                best_i = i
+                best_j = j
+    return best_i, best_j
 
 if __name__ == "__main__":
     red = (255, 0, 0)
@@ -44,8 +88,6 @@ if __name__ == "__main__":
     for color in colors:
         for other in colors:
             print(dct[color], dct[other], color_difference(color, other))
-
-
 
 
 
